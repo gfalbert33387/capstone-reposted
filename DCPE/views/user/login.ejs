@@ -1,0 +1,66 @@
+<%- include('../partials/header.ejs') %> <% if (flashMessages.success) { %>
+<div class="alert alert-success"><%= flashMessages.success %></div>
+<% } %>
+
+<div class="container">
+  <div class="row justify-content-center" id="login-form">
+    <div class="col-md-6">
+      <h2 class="mb-4 font-weight-bold text-dark">Login</h2>
+      <form id="loginForm" class="mb-4" action="/user/login" method="POST">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-warning">Login</button>
+      </form>
+
+      <div class="mt-4">
+        <h4 class="text-dark">Save Preferences</h4>
+        <div class="form-check mb-3">
+          <input type="checkbox" class="form-check-input" id="saveToProfile" />
+          <label class="form-check-label" for="saveToProfile"
+            >Save to Profile</label
+          >
+        </div>
+        <div class="form-check mb-3">
+          <input type="checkbox" class="form-check-input" id="saveToDevice" />
+          <label class="form-check-label" for="saveToDevice"
+            >Save to Device</label
+          >
+        </div>
+        <button
+          type="button"
+          onclick="savePreferences()"
+          class="btn btn-secondary"
+        >
+          Save Preferences
+        </button>
+      </div>
+
+      <div class="mt-4">
+        <h4 class="text-dark">Not registered?</h4>
+        <a href="/user/signup" class="btn btn-secondary">Sign Up</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,328 @@
+<%- include('../partials/header.ejs')%>
+
+<% if (flashMessages.success) { %>
+  <div class="alert alert-success">
+    <%= flashMessages.success %>
+  </div>
+<% } %>
+
+<% if (currentUser) { %>
+  <p>Welcome, <%= currentUser.name %>!</p>
+<% } %>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-1">
+          <img
+            class="rounded-circle profile-image"
+            width="150px"
+            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+            alt="user photo"
+          />
+          <span class="font-weight-bold mt-3"><%= user.firstName %> <%= user.lastName %></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="profile-main">
+        <div class="profile-header mb-4">
+          <h4 class="text-dark">New Job Preferences</h4>
+          <p class="text-center">all fields are optional, except Title</p>
+        </div>
+
+        <form action='/job-prefs/post' method='POST'>
+          
+          <!-- Desired Pay Section -->
+          <div class="profile-header mb-4">
+            <h4 class="text-dark mb-3">Desired Pay</h4>
+            <div class="form-group">
+              
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="minAnnual" class="labels">Minimum Median Annual</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="minAnnual"
+                      name="minAnnual"
+                      placeholder="USD"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="maxAnnual" class="labels">Maximum Median Annual</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="maxAnnual"
+                      name="maxAnnual"
+                      placeholder="USD"
+                    />
+                  </div>
+                </div>
+              </div>
+            
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="minHourly" class="labels">Minimum Median Hourly</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="minHourly"
+                      name="minHourly"
+                      placeholder="USD"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="maxHourly" class="labels">Maximum Median Hourly</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="maxHourly"
+                      name="maxHourly"
+                      placeholder="USD"
+                    />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Jobs Growth Section -->
+          <div class="profile-header mb-4">
+            <h4 class="text-dark mb-3">Yearly Jobs Growth</h4>
+            <div class="form-group">
+              
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="minGrowthNum" class="labels">Minimum Total Growth</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="minGrowthNum"
+                      name="minGrowthNum"
+                      placeholder="positive or negative"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="maxGrowthNum" class="labels">Maximum Total Growth</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="maxGrowthNum"
+                      name="maxGrowthNum"
+                      placeholder="positive or negative"
+                    />
+                  </div>
+                </div>
+              </div>
+            
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="minGrowthPerc" class="labels">Minimum Percent Growth</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="minGrowthPerc"
+                      name="minGrowthPerc"
+                      placeholder="positive or negative, +4% is average"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="maxGrowthPerc" class="labels">Maximum Percent Growth</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="maxGrowthPerc"
+                      id="maxGrowthPerc"
+                      placeholder="positive or negative, +4% is average"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education Section -->
+          <% if (keyEdus && keyEdus.length > 0){ %>
+            <div class="profile-header mb-4">
+              <h4 class="text-dark mb-3">Required Education</h4>
+              <div class="form-group">              
+
+            <% keyEdus.forEach(function(string, index) { %>
+
+              <% if (index % 3 === 0) { %>
+                <!-- new row for every 3 items -->
+                <div class="row" style="margin-bottom:12px; justify-content: space-evenly;">
+              <% } %>
+
+                <div class="col-md-3" style="display:inline-flex; align-items: center;">
+                  <!-- capitalize 1st letter -->
+                  <input type="checkbox" name="reqEdu" id="reqEdu-<%=string%>" value="<%= string %>"/>
+                  <label for="reqEdu-<%=string%>" class="labels" style="margin-left:8px;">
+                    <%= string.charAt(0).toUpperCase() + string.slice(1) %></label>
+                </div>
+
+              <% if (index % 3 === 2 || index === keyEdus.length - 1) { %>
+                <!-- row closer for every 3 items -->
+                </div>
+              <% } %>
+
+            <% }) %>
+              </div>
+            </div>
+
+          <% } %>
+
+          <!-- Work Experience Section -->
+          <% if (keyExps && keyExps.length > 0){ %>
+            <div class="profile-header mb-4">
+              <h4 class="text-dark mb-3">Required Work Experience</h4>
+              <div class="form-group">              
+
+            <% keyExps.forEach(function(string, index) { %>
+
+              <% if (index % 3 === 0) { %>
+                <!-- new row for every 3 items -->
+                <div class="row" style="margin-bottom:12px; justify-content: space-evenly;">
+              <% } %>
+
+                    <div class="col-md-3" style="display:inline-flex; align-items: center;">
+                      <!-- capitalize 1st letter -->
+                      <input type="checkbox" name="reqWorkExp" id="reqWorkExp-<%=string%>" value="<%= string %>"/>
+                      <label for="reqWorkExp-<%=string%>" class="labels" style="margin-left:8px;">
+                        <%= string.charAt(0).toUpperCase() + string.slice(1) %>
+                      </label>
+                    </div>
+
+              <% if (index % 3 === 2 || index === keyExps.length - 1) { %>
+                <!-- row closer for every 3 items -->
+                </div>
+              <% } %>
+
+            <% }) %>
+              </div>
+            </div>
+
+          <% } %>
+
+          <!-- Skills Section -->
+          <% if (keySkills && keySkills.length > 0){ %>
+            <div class="profile-header mb-4">
+              <h4 class="text-dark mb-3">Required Skills</h4>
+              <div class="form-group">              
+
+            <% keySkills.forEach(function(string, index) { %>
+
+              <% if (index % 3 === 0) { %>
+                <!-- new row for every 3 items -->
+                <div class="row" style="margin-bottom:12px; justify-content: space-evenly;">
+              <% } %>
+
+
+                    <div class="col-md-3" style="display:inline-flex; align-items: center;">
+                      <!-- capitalize 1st letter -->
+                      <input type="checkbox" name="reqSkillset" id="reqSkillset-<%=string%>" value="<%= string %>"/>
+                      <label for="reqSkillset-<%=string%>" class="labels" style="margin-left:8px;">
+                        <%= string.charAt(0).toUpperCase() + string.slice(1) %>
+                      </label>
+                    </div>
+
+              <% if (index % 3 === 2 || index === keySkills.length - 1) { %>
+                <!-- row closer for every 3 items -->
+                </div>
+              <% } %>
+
+            <% }) %>
+              </div>
+            </div>
+
+          <% } %>
+
+          <!-- Title section -->
+          <div class="row text-center">
+            <div class="form-group">
+              <label for="title" class="labels">Name these Preferences</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  name="title"
+                  placeholder="text"
+                  required
+                />
+              </div>
+          </div>
+
+          <!-- Save Profile Button -->
+          <div class="text-center mt-4">
+            <button
+              class="btn btn-warning save-button"
+              type="submit"
+              id="savePrefsButton"
+            >
+              Save Job Preferences
+            </button>
+            <!-- Confirmation Message -->
+            <div class="text-success mt-2" id="saveConfirmation" style="display: none;">
+              Preferences saved successfully!
+            </div>
+          </div>
+        
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs')%>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const inputFields = document.querySelectorAll('.added-input-field');
+
+    // Function to toggle edit mode
+    window.toggleEditMode = function () {
+      inputFields.forEach(function (inputField) {
+        inputField.removeAttribute('disabled');
+      });
+
+      // Show Save Changes button, hide Edit button
+      document.querySelector('.save-button').style.display = 'inline-block';
+      document.querySelector('.edit-button').style.display = 'none';
+    };
+
+    // Function to save changes
+    window.saveChanges = function () {
+      inputFields.forEach(function (inputField) {
+        inputField.setAttribute('disabled', 'true');
+      });
+
+      // Hide Save Changes button, show Edit button
+      document.querySelector('.save-button').style.display = 'none';
+      document.querySelector('.edit-button').style.display = 'inline-block';
+
+      // Show save confirmation message
+      document.getElementById('saveConfirmation').style.display = 'block';
+      // Hide the confirmation message after 3 seconds
+      setTimeout(function () {
+        document.getElementById('saveConfirmation').style.display = 'none';
+      }, 3000);
+    };
+  });
+</script>

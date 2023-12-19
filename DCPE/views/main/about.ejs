@@ -1,0 +1,99 @@
+<%- include('../partials/header.ejs')%>
+
+<% if (flashMessages.success) { %>
+  <div class="alert alert-success">
+    <%= flashMessages.success %>
+  </div>
+<% } %>
+
+<% if (currentUser) { %>
+  <p>Welcome, <%= currentUser.name %>!</p>
+<% } %>
+
+<!-- The rest of your view template -->
+
+
+<div id="about-container">
+  <h2>About Us</h2>
+  <br />
+  <p>
+    Welcome to the Dynamic Career Explorer Pathway, where we believe that every
+    career deserves a meaningful journey.
+  </p>
+  <br />
+  <p>
+    At DCPE, we are passionate about connecting individuals with their dream
+    careers. We understand that finding the right job isn't just about a
+    paycheck; it's about finding a path that aligns with your aspirations,
+    talents, and values. Our mission is to empower job seekers and professionals
+    to explore new horizons, realize their potential, and make informed career
+    decisions.
+  </p>
+  <br />
+  <h3>Our Vision</h3>
+  <br />
+  <p>
+    Our vision is to be the guiding light for all those seeking to navigate the
+    complex and ever-evolving world of careers. We strive to create a world
+    where everyone can pursue their dreams and ambitions, supported by
+    opportunities that match their unique skills and passions.
+  </p>
+  <div id="image-container">
+    <img src="/images/diversity.jpg" alt="Diverse Community" />
+    <img src="/images/technology.jpg" alt="Cutting-Edge Technology" />
+    <img src="/images/learning.jpg" alt="Continuous Learning" />
+  </div>
+  <br />
+  <h3>What Sets Us Apart</h3>
+  <br />
+  <ul>
+    <li>
+      <b>Personalized Career Journeys:</b> We don't believe in a
+      one-size-fits-all approach. We offer personalized career advice,
+      resources, and opportunities tailored to your individual needs.
+    </li>
+    <li>
+      <b>Cutting-Edge Technology:</b> We harness the latest technology to match
+      job seekers with the best-suited positions and provide in-depth insights
+      into market trends.
+    </li>
+    <li>
+      <b>A Diverse Community:</b> Our platform fosters a diverse and inclusive
+      community of professionals, ensuring that opportunities are accessible to
+      all, regardless of background or experience.
+    </li>
+    <li>
+      <b>Continuous Learning:</b> We encourage a culture of continuous learning,
+      providing resources to help you develop the skills and knowledge you need
+      to thrive in your chosen field.
+    </li>
+  </ul>
+  <br />
+  <h3>Our Commitment</h3>
+  <br />
+  <p>At DCPE, we are committed to:</p>
+  <ul>
+    <li>
+      Empowering job seekers with the tools and knowledge to succeed in their
+      careers.
+    </li>
+    <li>Fostering diversity, equity, and inclusion in the job market.</li>
+    <li>
+      Delivering valuable insights and opportunities through our platform.
+    </li>
+    <li>
+      Providing exceptional support and guidance to help you achieve your goals.
+    </li>
+  </ul>
+  <br />
+  <p>
+    Join us on your career journey and let us be your trusted partner in
+    achieving your professional dreams. Together, we can build a brighter, more
+    fulfilling future.
+  </p>
+  <br />
+  <br />
+  <p><strong>DCPE</strong> – Helping you make the right moves.</p>
+</div>
+
+<%- include('../partials/footer.ejs')%>

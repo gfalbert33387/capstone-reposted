@@ -1,0 +1,53 @@
+<%- include('../partials/header.ejs')%>
+
+<% if (flashMessages.success) { %>
+  <div class="alert alert-success">
+    <%= flashMessages.success %>
+  </div>
+<% } %>
+
+<% if (currentUser) { %>
+  <p>Welcome, <%= currentUser.name %>!</p>
+<% } %>
+
+<!-- The rest of your view template -->
+
+<div class="row justify-content-center" id="contact-container">
+  <form id="contact-form" action="/submit_contact_us_form" method="POST">
+    <h2>Contact Us</h2>
+
+    <input
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Name"
+      required
+    /><br />
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Email"
+      required
+    /><br />
+    <input
+      type="text"
+      id="subject"
+      name="subject"
+      placeholder="Subject"
+      required
+    /><br />
+    <textarea
+      id="message"
+      name="message"
+      placeholder="Message"
+      required
+    ></textarea
+    ><br />
+    <button type="submit" class="btn btn-warning">Submit</button>
+  </form>
+</div>
+
+<!--COMMENT-->
+
+<%- include('../partials/footer.ejs')%>

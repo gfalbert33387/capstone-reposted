@@ -1,0 +1,225 @@
+<%- include('../partials/header.ejs')%> <% if (flashMessages.success) { %>
+<div class="alert alert-success"><%= flashMessages.success %></div>
+<% } %> <% if (currentUser) { %>
+<p>Welcome, <%= currentUser.name %>!</p>
+<% } %>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-1">
+          <img
+            class="rounded-circle profile-image"
+            width="150px"
+            src="/images/user-profile-pic.png"
+            alt="user photo"
+          />
+          <span class="font-weight-bold mt-3"
+            ><%= user.firstName %> <%= user.lastName %></span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="profile-main">
+        <div class="profile-header mb-4">
+          <h4 class="text-dark">Profile</h4>
+        </div>
+        <form>
+          <!-- Personal Information Section -->
+          <div class="profile-section">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="firstName" class="labels">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    placeholder="First Name"
+                    value="<%= user.firstName %>"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="lastName" class="labels">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    placeholder="Last Name"
+                    value="<%= user.lastName %>"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="intro" class="labels">Introduction</label>
+              <input
+                type="text"
+                class="form-control"
+                id="intro"
+                placeholder="Intro"
+                value="<%= user.intro || '' %>"
+                disabled
+              />
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="city" class="labels">City</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="city"
+                    placeholder="City"
+                    value="<%= user.city || '' %>"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="state" class="labels">State</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="state"
+                    placeholder="State"
+                    value="<%= user.state || '' %>"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <!-- Save Profile Button -->
+          <div class="text-center mt-4">
+            <button
+              class="btn btn-secondary edit-button"
+              type="button"
+              onclick="toggleEditMode()"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-warning save-button"
+              type="button"
+              id="saveProfileButton"
+              style="display: none"
+              onclick="saveChanges()"
+            >
+              Save Changes
+            </button>
+            <!-- Confirmation Message -->
+            <div
+              class="text-success mt-2"
+              id="saveConfirmation"
+              style="display: none"
+            >
+              Profile saved successfully!
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Job Preferences Section -->
+
+        <div class="profile-main">
+          <div class="profile-header mb-4">
+            <h4 class="text-dark">Job Preferences</h4>
+          </div>
+          <div class="form-group">
+            <% if(jobPrefs.length) {
+
+              jobPrefs.forEach((prefSet)=>{ %>
+                
+                <div class="row">
+
+                  <div class="col-md-9">
+                    <p><a style="color:black" href= "/jobs/<%= prefSet.id%>"><%= prefSet.title %></a></p>
+                  </div>
+
+                  <div class="col-md-3">
+                    <form style="display:inline">
+                      <button type="submit" formmethod="POST" 
+                        formaction="/job-prefs/<%= prefSet.id%>?_method=DELETE"
+                        class="btn btn-secondary edit-button"
+                        >Delete
+                      </button>
+                    </form>
+
+                    <a href="/job-prefs/<%= prefSet.id%>/edit">
+                      <button class="btn btn-warning save-button" type="button">
+                          Edit
+                      </button>
+                    </a>
+                  </div>
+                </div>
+
+              <% });
+          } else { %>
+              <p>You haven't saved any Preferences.</p>
+          <% } %>
+          </div>
+        </div>
+          <div class="form-group text-center">
+            <a href="/job-prefs/new">
+              <button class="btn btn-warning save-button" type="button" id="saveProfileButton">
+                  New
+              </button>
+            </a>
+          </div>
+            
+          </div>
+        </div>       
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const inputFields = document.querySelectorAll(".added-input-field, .form-control");
+
+    // Function to toggle edit mode
+    window.toggleEditMode = function () {
+      inputFields.forEach(function (inputField) {
+        inputField.removeAttribute("disabled");
+      });
+
+      // Show Save Changes button, hide Edit button
+      document.querySelector(".save-button").style.display = "inline-block";
+      document.querySelector(".edit-button").style.display = "none";
+    };
+
+    // Function to save changes
+    window.saveChanges = function () {
+      inputFields.forEach(function (inputField) {
+        inputField.setAttribute("disabled", "true");
+      });
+
+      // Hide Save Changes button, show Edit button
+      document.querySelector(".save-button").style.display = "none";
+      document.querySelector(".edit-button").style.display = "inline-block";
+
+      // Show save confirmation message
+      document.getElementById("saveConfirmation").style.display = "block";
+      // Hide the confirmation message after 3 seconds
+      setTimeout(function () {
+        document.getElementById("saveConfirmation").style.display = "none";
+      }, 3000);
+    };
+  });
+</script>
+
+
+
+<%- include('../partials/footer.ejs')%>
+

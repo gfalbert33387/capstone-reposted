@@ -1,0 +1,23 @@
+const myExpress = require('express')
+const controller = require('../controllers/jobPrefsController')
+
+const thisRouter = myExpress.Router()
+
+// GET request to serve the New Job Prefs form
+thisRouter.get('/new', controller.getNew);
+
+// POST request to submit the New Job Prefs form
+thisRouter.post('/post', controller.postNew);
+
+// GET request to serve the Edit Job Prefs form
+thisRouter.get('/:id/edit', controller.getEdit);
+
+// PUT request to submit the Edit Job Prefs form
+thisRouter.put('/:id', controller.putEdit);
+
+// DELETE request to delete the specified Job Prefs form
+thisRouter.delete('/:id', controller.delete);
+
+
+// Exposes module functionality to any file using `require(jobPrefsRoutes)`
+module.exports = thisRouter

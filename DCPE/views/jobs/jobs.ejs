@@ -1,0 +1,92 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="jobs-container">
+
+  <h2 class="centered-horizontally">Job Listings</h2>
+  <!-- Alphabetical link navigation -->
+  <div class="jump-to centered-horizontally">
+    <span><strong>Jump to:</strong></span>
+    <% for (let letter = 'A'.charCodeAt(0); letter <= 'Z'.charCodeAt(0);
+    letter++) { %>
+    <a href="#<%= String.fromCharCode(letter) %>">
+      <%= String.fromCharCode(letter) %></a
+    >
+    <% } %>
+  </div>
+
+  <% if (jsonData && jsonData.length > 0) { %>
+  <ul class="job-list">
+    <% jsonData.forEach(function(job) { %>
+    <li id="<%= job.title.charAt(0) %>" class="job-item">
+      <h3><%= job.title %><% if( percMatchArr.length !== 0 ){ %>,
+              <%= percMatchArr[jsonData.indexOf(job)] %>% Match
+          <% } %>                        
+      </h3>
+      <% if(job.description || job.citation) { %>
+        <p>
+          <%= job.description ? job.description : '';%> <% if(job.citation){ %>
+              <a style="color:black" href='<%=job.citation.join('')%>'>read more here</a>
+          <% } %>
+        </p>
+      <% } %>
+      <% if(job.medianAnnual){ %>
+        <p><strong>Median Annual Salary:</strong> $<%= job.medianAnnual.toLocaleString() %></p>
+      <% } %>
+      <% if(job.medianHourly){ %>
+        <p><strong>Median Hourly Wage:</strong> $<%= job.medianHourly %>/hr</p>
+      <% } %>
+      <% if(job.reqEdu){ %>
+        <p><strong>Required Education:</strong> <%= job.reqEdu %></p>
+      <% } %>
+      <% if(job.reqWorkExp){ %>
+        <p><strong>Required Work Experience:</strong> <%= job.reqWorkExp %></p>
+      <% } %>
+      <% if(job.jobGrowthPerc || job.jobGrowthNum){ %>
+        <p>
+          <strong>Job Growth:</strong> <%= job.jobGrowthPerc %>% (<%=
+          Number(job.jobGrowthNum).toLocaleString() %> jobs)
+        </p>
+      <% } %>
+      <% if(job.hours){ %>
+        <p><strong>Typical Work Hours:</strong> <%= job.hours.join(', ') %></p>
+      <% } %>
+      <% if(job.reqSkillset){ %>
+        <p><strong>Required Skills:</strong></p>
+        <ul>
+          <% job.reqSkillset.forEach(function(skill) { %>
+          <li><%= skill %></li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </li>
+    <% }); %>
+  </ul>
+  <% } else { %>
+  <p class="no-jobs">No job listings are available at the moment.</p>
+  <% } %>
+
+  <!-- Button to scroll back up -->
+  <button class="scroll-to-top" onclick="scrollToTop()">&#11014;</button>
+</div>
+
+<script>
+  // Jobs Page: Function to scroll to top of page - L
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Jobs Page: Function to show/hide button depending on scroll location - L
+  window.onscroll = function () {
+    var scrollButton = document.querySelector(".scroll-to-top");
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      scrollButton.style.display = "block";
+    } else {
+      scrollButton.style.display = "none";
+    }
+  };
+</script>
+
+<%- include('../partials/footer.ejs') %>

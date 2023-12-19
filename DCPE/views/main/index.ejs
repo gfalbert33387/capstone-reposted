@@ -1,0 +1,67 @@
+<%- include('../partials/header.ejs')%>
+
+    <!-- The entirety of each page body is wrapped in a <div> for formatting.
+        See header and footer partials if you want details. 
+        It's better to wrap this code in a second div and assign it a new class than
+        editing the superclass div in the partials-->
+
+        <% if (flashMessages.success) { %>
+            <div class="alert alert-success">
+              <%= flashMessages.success %>
+            </div>
+          <% } %>
+          
+          <% if (currentUser) { %>
+            <p>Welcome, <%= currentUser.name %>!</p>
+          <% } %>
+          
+          <!-- The rest of your view template -->
+          
+
+    <figure class="overlay-all-children full-width img-fluid">
+        <img src="/images/figma-chess.jpg" alt="A good move!" class="banner-img">
+    </figure>
+
+    <div>
+        <p class="text-shadow home-tag-line centered-horizontally home-intro">
+            Your career journey is a unique and evolving adventure
+        </p> 
+        <p class="home-intro">
+            Whether you're just starting out, seeking to advance in your current role, or transitioning to a new career, DCPE is your compass to navigate the ever-changing professional landscape.
+        <br><br>
+            Embark on a strategic journey towards your dream career. Begin by taking the comprehensive career aptitude test, designed to identify perfect matches based on your unique interests. Once you've gained clarity, explore our curated job listings that align seamlessly with your qualifications and professional interests. For an extra edge, trust our experts to refine your resume and maximize its impact. Elevate your job search with precision and professionalism.
+        </p> 
+
+        <div class="grid-container centered-horizontally">
+
+            <div class="grid-item"><img src="/images/undraw_online_test_re_kyfx.svg" id="cat-img1" alt="Online test">
+                <div class="cat-info">
+                    Start with the career aptitude test to identify ideal career matches based on your interests."
+                </div>
+                <form action="https://www.mynextmove.org/explore/ip">
+                    <button type="submit" class="cat-button"">Start Test &#187;</button>
+                </form> 
+            </div>
+
+            <div class="grid-item"><img src="/images/undraw_job_hunt_re_q203.svg" id="cat-img1" alt="Job search">
+                <div class="cat-info">
+                    Explore current job listings that align with your qualifications and professional interests.
+                </div>
+                <form action="/jobs"">
+                    <button type="submit" class="cat-button"">Search Jobs &#187;</button>
+                </form> 
+            </div>
+
+            <div class="grid-item"><img src="/images/undraw_hiring_re_yk5n.svg" id="cat-img1" alt="Hiring">
+                <div class="cat-info">
+                    For expert assistance in refining your resume and maximizing its impact. 
+                </div>
+                <form action="#">
+                    <button type="submit" class="cat-button"">Resume Help &#187;</button>
+                </form> 
+            </div>
+
+        </div>
+    </div>   
+    
+<%- include('../partials/footer.ejs')%>

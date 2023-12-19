@@ -1,0 +1,63 @@
+<%- include('../partials/header') %> <% if (flashMessages.success) { %>
+<div class="alert alert-success"><%= flashMessages.success %></div>
+<% } %> <% if (currentUser) { %>
+<p>Welcome, <%= currentUser.name %>!</p>
+<% } %>
+
+<!-- The rest of your view template -->
+
+<main>
+  <div class="row justify-content-center" id="signup-container">
+    <h2 class="text-center mb-5 text-dark">Sign Up</h2>
+  <form id="signup-form" action="/user/signup" method="POST">
+    <!-- Form fields including first name, last name, email, and password -->
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="firstName"
+        required
+        placeholder="First Name"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="lastName"
+        required
+        placeholder="Last Name"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        required
+        placeholder="Email Address"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        required
+        placeholder="Password"
+      />
+    </div>
+    
+    <button type="submit" class="btn btn-warning">Create Account</button>
+  </form>
+</main>
+</div>
+
+<%- include('../partials/footer') %>

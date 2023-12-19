@@ -1,0 +1,14 @@
+<% include partials/header %>
+
+<h1>Resume Feedback Tool</h1>
+<form action="/resume-feedback" method="post" enctype="multipart/form-data">
+  <input type="file" name="resume" required />
+  <button type="submit">Upload Resume</button>
+</form>
+
+<% if (feedback) { %>
+<div class="feedback">
+  <h2>Your Personalized Feedback</h2>
+  <p><%= feedback %></p>
+</div>
+<% } %> <% include partials/footer %>

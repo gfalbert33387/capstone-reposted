@@ -1,0 +1,537 @@
+*{ /* universal selector, lowest priority in case of collision */
+    margin: 0;
+    position: relative;
+    font-family: 'Inter', 'SF Pro Text', 'SF Pro Display', 'San Francisco', 'Arial', sans-serif;
+    color: black;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+/* block formatting classes */
+.overlay-all-children{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+    .overlay-all-children > *{
+        grid-row-start: 1;
+        grid-column-start: 1;
+    }
+
+    /* Use these in conjunction with a wrapper class with overlay-all-children to simulate 
+        absolute positioning without disrupting workflow or wrapper size */
+    .centered-horizontally, .centered-vertically, 
+    .centered-full, .left-aligned, .right-aligned,
+    .top-aligned, .bottom-aligned{
+        display: block;
+    }    
+
+    .centered-horizontally, .centered-full{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .centered-vertically, .centered-full{
+        margin-top: auto;
+        margin-bottom: auto;
+    }   
+
+    .left-aligned{
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    .right-aligned{
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .top-aligned{
+        margin-top: 0;
+    }
+
+    .bottom-aligned{
+        margin-top: auto;
+        margin-bottom: 0;
+    }
+    .front-layer{
+        z-index: 1;
+    }
+
+    .back-layer{
+        z-index: -1;
+    }
+
+/* block styling */
+.opaque-black-bg{
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.825);
+    backdrop-filter: blur(0.125rem);
+    background-size:contain;
+}
+
+/* typography */
+
+.text-shadow{
+    text-align: center;
+    text-shadow: 0 .25rem .25rem rgb(0 0 0 / 25%);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+    /* h1 is section headers. Ex: "Contact" figma page */
+
+    /* h2 is subsection headers. Ex: "My Profile" figma page */
+
+    /* h3 is submission buttons. Ex: "Contact" figma page */
+
+    /* h4 is reserved for the bold text in header and footer */
+h1, h2, h3, h4{ 
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+    h2, h4{ 
+        color: #FFF;
+    }
+
+    h3, h4{ 
+        font-size: 1.5rem;
+        text-transform: uppercase;
+    }
+
+p, ul, ol{
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+/*Navbar Styling*/
+.container-fluid{
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    background-color: #121212;
+}
+
+.content-container{
+    margin: 2.188rem 10% 2.188rem 10%;
+}
+
+.logo{
+    width: 100%;
+}
+
+.logo-container{
+    margin-top: -3.125rem;
+    z-index: -1;
+    background-color: #121212;
+}
+
+.full-width {
+	left: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+    margin-top: -2.188rem;
+	max-width: 100vw;
+	position: relative;
+	right: 50%;
+	width: 100vw;
+}
+
+nav{
+    margin-bottom: 1.563rem;
+    z-index: 999;
+    background-color: #121212;
+}
+
+nav img{
+    height: 3.125rem;
+    width: auto;
+}
+
+.nav-link{
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+
+.nav-link:hover{
+    color: #ffc107;
+}
+
+.navbar-toggler-icon{
+    color: white;
+}
+
+.dropdown{
+    z-index: 998;
+}
+
+.dropdown-item:hover{
+    background-color: #ffc107;
+}
+
+.dropdown-item{
+    color: white;
+}
+
+.dropdown-divider{
+    background-color: white;
+}
+/*End Nav Styling*/
+
+.home-intro{
+    padding: 2rem;
+    padding-top: 0;
+    margin: 0 auto;
+}
+
+    /* GREG - index.ejs */
+    .banner-img{
+        width: 100%;
+        height: auto;
+        margin: -1.563rem auto;
+    }
+
+        .banner-img ~ *{ /* select all next siblings */
+            width: fit-content;
+            padding: 5rem;
+
+            /* did padding instead
+            width: 58.125rem;
+            height: 16.9375rem; */
+            
+            text-align: center;
+            font-size: 5rem;
+            font-weight: 400;
+            text-transform: uppercase;
+
+            /* Greg: I added this, idk how I feel about it */
+            border-radius: 10px;
+        }
+
+    .home-tag-line{
+        padding: 2rem;
+        max-width: 46.25rem;
+    }
+
+    .grid-container {
+        padding: 2rem;
+        padding-top: 0;
+        padding-bottom: 6.25rem;
+        max-width: 62.5rem;
+        display: grid;
+        gap: 1.25rem;
+        
+    }
+        .grid-item{
+            background: #121212;
+            border-radius: .313rem;
+            height: 400px;
+        }
+        
+/*Responsive Grid Styling */
+@media (min-width: 56.25rem) {
+.grid-container { grid-template-columns: repeat(3, 1fr); }
+}
+        
+/* homepage content styling*/
+#cat-img1 {
+    width: auto;
+    height: 12.5rem;
+    display: block;
+    margin: .625rem auto;
+    padding: .625rem;
+}
+
+div.cat-info {
+    width: 80%;
+    display: block;
+    color: white;
+    margin: .938rem auto 1.25rem auto;
+    text-align: justify;
+}
+
+#career-img {
+    width: 18.5rem;
+    height: 22.5rem;
+}
+
+#career-img:hover {
+    opacity: 0.7;
+}
+
+button.cat-button {
+    margin: 1.875rem auto .625rem auto;
+    width: 9.375rem;
+    display: grid;
+    color: #ffc107;
+    background-color: transparent;
+    border: .125rem solid #ffc107;
+    border-radius: 1.25rem;
+    padding: .313rem;
+    font-size: 1.125rem;
+}
+
+button.cat-button:hover {
+    background-color: #ffc107;
+    color: black;
+    transition: .35s;
+}
+
+    /* OTHER PAGE-UNIQUE SELECTORS HERE */
+
+        /* MUSTAFA */
+
+        /* JAKOB */
+
+        /* WALKER */
+
+        /* CHASE */
+
+        /* LAUREN */
+
+/* Form container styling*/
+#contact-container,
+#signup-container,
+#login-form {
+    background-color: #FFFFFF;
+    padding: 1.875rem;
+    border-radius: .625rem;
+    box-shadow: 0rem 0rem .625rem 0rem                     rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 46.875rem;
+    margin: 1.875rem auto;
+
+}
+
+/* contact form - L*/
+#contact-container .btn {
+    background-color: #FFC107;
+    color: #000000;
+}
+
+#contact-container .btn:hover {
+    background-color: #FFD54F;
+    color: #000000;
+}
+
+#contact-form {
+    width: 25rem;
+    margin: 0 auto;
+}
+
+#contact-form h2 {
+    color: black;
+    padding-bottom: 2.5rem;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form textarea {
+    width: 100%;
+    padding: .75rem 1.25rem;
+    margin: .5rem 0;
+    display: inline-block;
+    border: .063rem solid #ccc;
+    box-sizing: border-box;
+    border-radius: .625rem;
+}
+
+#contact-form textarea {
+    width: 100%;
+    height: 150px;
+}
+
+#contact-form input[type="submit"] {
+    background-color: black;
+    color: white;
+    padding: .875rem 1.25rem;
+    margin: .5rem 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: .625rem;
+}
+
+#contact-form input[type="submit"]:hover {
+    color: white;
+    background-color: #e62e00;
+}
+/* end contact form style - L*/
+
+
+/* about us - L */
+#about-container{
+    width: 100%;
+    margin: 0rem auto;
+}
+
+#about-container h2 {
+    color: black;
+}
+
+#image-container{
+    margin: 0 auto;
+}
+
+#image-container img{ 
+    display: inline-block;
+    height: 15.625rem;
+    width: 25rem;
+    padding: .625rem;
+}
+/* end about style */
+
+/* jobs - J */
+.job-list {
+    list-style: none;
+    padding: 0;
+}
+
+.job-item {
+    background-color: #f9f9f9;
+    border: 3px solid #ffc107;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+}
+.job-item h3 {
+    margin-top: 0;
+    color: #333;
+}
+.job-item p {
+    margin: 5px 0;
+}
+.job-item ul {
+    padding-left: 20px;
+}
+.job-item ul li {
+    margin-bottom: 5px;
+}
+.centered-horizontally {
+    text-align: center;
+    color: #333;
+}
+.no-jobs {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #666;
+}
+
+/* jobs - L */
+.job-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+    gap: 20px; /* Adjust the gap between grid items as needed */
+}
+
+.job-item {
+    border: 3px double #ffc107;
+    padding: 15px;
+}
+
+/* Jump-to links and scroll-to-top button styles*/
+.jump-to {
+    margin: 20px;
+}
+
+.jump-to a {
+    margin-right: 10px;
+    color: gray;
+    font-weight: bold;
+}
+
+.jump-to a:hover {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #121212;
+    border: 2px solid #ffc107; 
+    color: #ffc107;
+    border: none;
+    border-radius: 20%;
+    padding: 15px; 
+    cursor: pointer;
+    display: none;
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.scroll-to-top:hover{
+    font-size: 30px;
+    background-color: #ffc107;
+    color: black;
+    transform: scale(1.1);
+}
+/* end jobs style */
+
+
+/* footer styling */
+footer{
+    background-color: #121212;
+}
+
+#footer p,a,i,hr{
+    color: white;
+}
+#footer a{
+    text-decoration: none;
+}
+
+#socials a{
+    font-size:xx-large;
+}
+
+#socials a:hover{
+    color: #ffc107;
+}
+
+#login-form{
+    padding-bottom: 6.25rem;
+}
+
+
+.profile-sidebar {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .profile-main {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-image {
+    border: 5px solid #ffffff;
+  }
+  
+  .profile-header {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-main.labels {
+    font-weight: bold;
+  }
+  
+  .profile-button {
+    width: 150px;
+  }
+
+  .add-button:hover{
+    background-color: #ffc107;
+  }
